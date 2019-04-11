@@ -56,7 +56,7 @@ type BuildInfo struct {
 	GoVersion  string // introduced in v0.12.0
 }
 
-var defaultApp = newApp()
+var defaultApp = NewApp()
 
 // App method returns the aah application instance.
 func App() *Application {
@@ -67,7 +67,7 @@ func App() *Application {
 // aah application instance
 //______________________________________________________________________________
 
-func newApp() *Application {
+func NewApp() *Application {
 	aahApp := &Application{
 		RWMutex: sync.RWMutex{},
 		cli:     console.NewApp(),
