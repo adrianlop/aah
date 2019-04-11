@@ -31,7 +31,7 @@ import (
 )
 
 func TestSecuritySessionStore(t *testing.T) {
-	app := newApp()
+	app := NewApp()
 	err := app.AddSessionStore("file", &session.FileStore{})
 	assert.NotNil(t, err)
 	assert.Equal(t, "session: store name 'file' is already added, skip it", err.Error())

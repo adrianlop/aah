@@ -219,7 +219,7 @@ func TestHTTPEngineTestRequests(t *testing.T) {
 }
 
 func TestServerRedirect(t *testing.T) {
-	a := newApp()
+	a := NewApp()
 	a.cfg = config.NewEmpty()
 
 	// www redirect

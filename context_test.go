@@ -36,7 +36,7 @@ func testSubdomainValue(t *testing.T, host, subdomain string, isSubdomain bool) 
 }
 
 func TestContextSetURL(t *testing.T) {
-	a := newApp()
+	a := NewApp()
 	a.cfg = config.NewEmpty()
 	err := a.initLog()
 	assert.Nil(t, err)
@@ -73,7 +73,7 @@ func TestContextSetURL(t *testing.T) {
 }
 
 func TestContextSetMethod(t *testing.T) {
-	a := newApp()
+	a := NewApp()
 	a.cfg = config.NewEmpty()
 	err := a.initLog()
 	assert.Nil(t, err)

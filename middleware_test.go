@@ -26,7 +26,7 @@ func (th *TestHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func TestMiddlewareToHandler(t *testing.T) {
-	a := newApp()
+	a := NewApp()
 	e := a.he
 
 	e.Middlewares(

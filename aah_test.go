@@ -218,7 +218,7 @@ func TestAppMisc(t *testing.T) {
 
 	// App packaged mode
 	t.Log("App packaged mode")
-	pa := newApp()
+	pa := NewApp()
 	l, _ := log.New(config.NewEmpty())
 	pa.logger = l
 	pa.SetPackaged(true)
@@ -259,7 +259,7 @@ func TestLogInitRelativeFilePath(t *testing.T) {
 	defer ess.DeleteFiles(logPath)
 
 	// Relative path file
-	a := newApp()
+	a := NewApp()
 	cfg, _ := config.ParseString(`log {
     receiver = "file"
     file = "sample-test-app.log"
@@ -280,7 +280,7 @@ func TestLogInitNoFilePath(t *testing.T) {
 	defer ess.DeleteFiles(logPath)
 
 	// Relative path file
-	a := newApp()
+	a := NewApp()
 	cfg, _ := config.ParseString(`log {
     receiver = "file"
   }`)
@@ -298,7 +298,7 @@ func TestAccessLogInitAbsPath(t *testing.T) {
 	logPath := filepath.Join(testdataBaseDir(), "sample-test-access.log")
 	defer ess.DeleteFiles(logPath)
 
-	a := newApp()
+	a := NewApp()
 	cfg, _ := config.ParseString(fmt.Sprintf(`server {
     access_log {
       file = "%s"
@@ -374,13 +374,13 @@ func newTestServer(t *testing.T, importPath string) *testServer {
 	// Manually do it here here, for aah CLI test no issue `aah test` :)
 	ts.manualInit()
 
-	ts.DiscordLog()
+	ts.DiscardLog()
 
 	return ts
 }
 
 func newTestApp(t *testing.T, importPath string) *Application {
-	a := newApp()
+	a := NewApp()
 	a.SetBuildInfo(&BuildInfo{
 		BinaryName: filepath.Base(importPath),
 		Timestamp:  time.Now().Format(time.RFC3339),
@@ -426,11 +426,11 @@ func (ts *testServer) Close() {
 	ts.server.Close()
 }
 
-func (ts *testServer) DiscordLog() {
+func (ts *testServer) DiscardLog() {
 	ts.app.Log().(*log.Logger).SetWriter(ioutil.Discard)
 }
 
-func (ts *testServer) UndiscordLog() {
+func (ts *testServer) LogToStdout() {
 	ts.app.Log().(*log.Logger).SetWriter(os.Stdout)
 }
 

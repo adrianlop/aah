@@ -24,7 +24,7 @@ import (
 func TestBindParamContentNegotiation(t *testing.T) {
 	defer ess.DeleteFiles("testapp.pid")
 
-	a := newApp()
+	a := NewApp()
 	cfg, _ := config.ParseString(`request {
     content_negotiation {
       enable = true
@@ -60,7 +60,7 @@ func TestBindParamContentNegotiation(t *testing.T) {
 }
 
 func TestBindAddValueParser(t *testing.T) {
-	app := newApp()
+	app := NewApp()
 	err := app.AddValueParser(reflect.TypeOf(time.Time{}), func(key string, typ reflect.Type, params url.Values) (reflect.Value, error) {
 		return reflect.Value{}, nil
 	})
@@ -69,7 +69,7 @@ func TestBindAddValueParser(t *testing.T) {
 }
 
 func TestBindValidatorWithValue(t *testing.T) {
-	app := newApp()
+	app := NewApp()
 	assert.NotNil(t, app.Validator())
 
 	// Validation failed
@@ -100,7 +100,7 @@ func TestBindValidatorWithValue(t *testing.T) {
 }
 
 func TestBindParamTemplateFuncs(t *testing.T) {
-	a := newApp()
+	a := NewApp()
 	a.viewMgr = &viewManager{a: a}
 
 	form := url.Values{}
